@@ -2067,6 +2067,12 @@
       props.events.new_edge4viewBox.forEach(function(handler) { handler(props, edge); });
     }
 
+    if (!isFinite(edge.x1) || !isFinite(edge.y1) || !isFinite(edge.x2) || !isFinite(edge.y2)) {
+      traceLog.add('not-ready'); // [DEBUG/]
+      traceLog.add('</updateViewBox>'); // [DEBUG/]
+      return false;
+    }
+
     curBBox.x = curStats.lineMask_x = curStats.lineOutlineMask_x = curStats.maskBGRect_x = edge.x1;
     curBBox.y = curStats.lineMask_y = curStats.lineOutlineMask_y = curStats.maskBGRect_y = edge.y1;
     curBBox.width = edge.x2 - edge.x1;
